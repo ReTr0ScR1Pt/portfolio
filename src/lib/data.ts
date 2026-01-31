@@ -53,6 +53,12 @@ export const education = [
 
 export const projects = [
 	{
+		title: 'Stellar Cyber Escalator',
+		description: 'Web tool that generates ready-to-send escalation tickets from Stellar Cyber JSON alert files, streamlining SOC workflow.',
+		tags: ['Stellar Cyber', 'SIEM', 'Automation', 'SOC', 'Web App'],
+		link: 'https://escalator.yomalpraveen.com'
+	},
+	{
 		title: 'AI-Powered Cybersecurity',
 		description: 'Hybrid CNN-LSTM-Attention model for cybersecurity threat detection and analysis using deep learning techniques.',
 		tags: ['Python', 'CNN', 'LSTM', 'Deep Learning', 'Cybersecurity'],
