@@ -59,6 +59,12 @@ export const projects = [
 		link: 'https://escalator.yomalpraveen.com'
 	},
 	{
+		title: 'CySA+ Study Guide',
+		description: 'Interactive study guide with comprehensive question bank and materials for CompTIA CySA+ certification exam preparation.',
+		tags: ['CompTIA', 'CySA+', 'Cybersecurity', 'Study Guide', 'Web App'],
+		link: 'https://cysa.yomalpraveen.com'
+	},
+	{
 		title: 'AI-Powered Cybersecurity',
 		description: 'Hybrid CNN-LSTM-Attention model for cybersecurity threat detection and analysis using deep learning techniques.',
 		tags: ['Python', 'CNN', 'LSTM', 'Deep Learning', 'Cybersecurity'],
