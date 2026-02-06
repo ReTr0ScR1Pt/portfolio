@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 export const profile = {
 	name: 'Yomal Praveen',
 	titles: ['Cyber Security Analyst', 'Ethical Hacker'],
@@ -124,9 +126,9 @@ export const certifications = [
 ];
 
 export const awards = [
-	{ name: 'Medusa CTF', place: '2nd Place' },
-	{ name: 'HashX CTF', place: '3rd Place' },
-	{ name: 'SLIIT Codefest', place: '3rd Place' }
+	{ name: 'Medusa CTF', place: '2nd Place', link: 'https://drive.google.com/file/d/1qhG7HTAzIDxA__4A4clQ7XnZhuwd8BpL/view?usp=sharing' },
+	{ name: 'HashX CTF', place: '3rd Place', link: 'https://drive.google.com/file/d/1VmM55qgw3qo0fem9nGOAtR-2-UmZN9Cd/view?usp=sharing' },
+	{ name: 'SLIIT Codefest', place: '3rd Place', link: 'https://drive.google.com/file/d/1QWxxXt0XGWcKn0IFZPpccoSSxG3A5Iby/view?usp=sharing' }
 ];
 
 export const skills = {
