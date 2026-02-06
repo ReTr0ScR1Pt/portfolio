@@ -253,10 +253,15 @@
 		<h3 class="text-xl font-bold mt-16 mb-6">CTF Achievements</h3>
 		<div class="flex flex-wrap gap-4">
 			{#each awards as award}
-				<div class="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)]">
+				<a
+					href={award.link}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] hover:border-[var(--color-accent)] transition-colors"
+				>
 					<span class="font-medium">{award.name}</span>
 					<span class="text-[var(--color-accent)] ml-2">{award.place}</span>
-				</div>
+				</a>
 			{/each}
 		</div>
 	</div>
