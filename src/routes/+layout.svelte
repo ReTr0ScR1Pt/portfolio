@@ -6,10 +6,11 @@
 	let { children } = $props();
 
 	const navLinks = [
-		{ href: '#about', label: 'About' },
-		{ href: '#experience', label: 'Experience' },
-		{ href: '#projects', label: 'Projects' },
-		{ href: '#contact', label: 'Contact' }
+		{ href: '/blog', label: 'Blog' },
+		{ href: '/#about', label: 'About' },
+		{ href: '/#experience', label: 'Experience' },
+		{ href: '/#projects', label: 'Projects' },
+		{ href: '/#contact', label: 'Contact' }
 	];
 
 	let scrolled = $state(false);
