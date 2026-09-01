@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 export const profile = {
 	name: 'Yomal Praveen',
 	titles: ['Cyber Security Analyst', 'Ethical Hacker'],
