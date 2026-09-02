@@ -62,7 +62,8 @@
 				hashes and sandboxes, not on the live payload. And every indicator in this post is
 				defanged: <code>hxxps://</code> instead of <code>https://</code>, and
 				<code>evil[.]com</code> instead of the clickable version. Copy that habit. A live URL
-				pasted into a ticket becomes a clickable link for whoever reads it next.
+				pasted into a ticket becomes a clickable link for whoever reads it next. And every
+				brand, domain and address in the examples here is made up.
 			</p>
 
 			<h2>Reading the headers</h2>
@@ -81,7 +82,7 @@
 				<strong>Return-Path</strong> is more honest. During the SMTP handshake the sending server
 				declares an address for bounces, called the envelope sender, and your receiving server
 				writes it into the message on delivery. The reader never sees this field, so attackers
-				often don't bother making it pretty. When From says <code>service@paypal.com</code> and
+				often don't bother making it pretty. When From says <code>service@acmepay.com</code> and
 				Return-Path says <code>x9k2@bounce.secure-notify[.]top</code>, the mail is telling on
 				itself. One caveat from real triage: bulk senders like SendGrid and Mailchimp legitimately
 				use their own bounce domains, so treat a mismatch as a lead, not a conviction.
@@ -103,7 +104,7 @@
 			</p>
 			<p>
 				<strong>Message-ID</strong> is a unique tag stamped by the sending system, and the part
-				after the @ normally matches the sending infrastructure. Mail claiming to be from PayPal
+				after the @ normally matches the sending infrastructure. Mail claiming to be from AcmePay
 				with a Message-ID minted on <code>srv2.secure-notify[.]top</code> has some explaining to
 				do. It's forgeable, so it stays supporting evidence, never the verdict.
 			</p>
@@ -117,14 +118,14 @@
 			<p>Here's what a bad day looks like in seven lines:</p>
 			<pre><code>Authentication-Results: spf=pass (sender IP is 203.0.113.11)
   smtp.mailfrom=bounce.secure-notify.top; dkim=none;
-  dmarc=fail header.from=paypal.com
-From: "PayPal Support" &lt;service@paypal.com&gt;
+  dmarc=fail header.from=acmepay.com
+From: "AcmePay Support" &lt;service@acmepay.com&gt;
 Reply-To: &lt;billing.desk.verify@gmail.com&gt;
 Return-Path: &lt;x9k2@bounce.secure-notify.top&gt;
 Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 			<p>
 				Four problems in one glance: SPF passed, but for the attacker's own bounce domain, not
-				PayPal. DMARC failed against the domain the reader actually sees. Replies go to a Gmail
+				AcmePay. DMARC failed against the domain the reader actually sees. Replies go to a Gmail
 				address. And the Message-ID was minted on the attacker's server. Any one of these is
 				worth a closer look. All four together is a verdict.
 			</p>
@@ -140,7 +141,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 				anyone can look it up. When a message arrives, the
 				receiving server checks whether the server that delivered it is on the list. On the list,
 				pass. Not on the list, fail. The trap: SPF checks the Return-Path domain, not the From
-				address a human reads. That's how the PayPal fake above earned its <code>spf=pass</code>.
+				address a human reads. That's how the AcmePay fake above earned its <code>spf=pass</code>.
 				The attacker's own domain vouched for the attacker's own server, which is technically
 				true and completely meaningless.
 			</p>
@@ -256,7 +257,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 			</p>
 			<p>
 				Links get the closest look. The text of a link and its destination are completely
-				independent, so a link reading <code>paypal.com/verify</code> can point anywhere. Hover
+				independent, so a link reading <code>acmepay.com/verify</code> can point anywhere. Hover
 				on desktop, long-press on mobile, and then read the actual domain from the end, right to
 				left. There's a diagram of this trick in the next section, because it fools more people
 				than any other.
@@ -320,7 +321,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 
 					<!-- Phish card -->
 					<rect x="8" y="28" width="362" height="336" rx="8" fill="var(--color-surface)" stroke="#ef4444" stroke-opacity="0.45" />
-					<text x="26" y="56" class="svg-t" font-size="13">From: PayPal Support</text>
+					<text x="26" y="56" class="svg-t" font-size="13">From: AcmePay Support</text>
 					<text x="26" y="74" class="svg-mono svg-red" font-size="12">&lt;service@secure-notify.top&gt;</text>
 					<text x="26" y="98" class="svg-t" font-size="13">Subject: <tspan class="svg-red">URGENT:</tspan> account will be closed</text>
 					<line x1="22" y1="112" x2="356" y2="112" stroke="var(--color-border)" />
@@ -328,11 +329,11 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 					<text x="26" y="160" class="svg-m" font-size="12.5">We detected unusual activity on your</text>
 					<text x="26" y="176" class="svg-m" font-size="12.5">account. Verify your identity <tspan class="svg-red">within 24</tspan></text>
 					<text x="26" y="192" class="svg-m" font-size="12.5"><tspan class="svg-red">hours</tspan> or it will be permanently closed.</text>
-					<text x="26" y="220" class="svg-link" font-size="12.5" text-decoration="underline">https://www.paypal.com/verify</text>
+					<text x="26" y="220" class="svg-link" font-size="12.5" text-decoration="underline">https://www.acmepay.com/verify</text>
 					<text x="26" y="240" class="svg-mono svg-red" font-size="11">really goes to: account-verify.net</text>
 					<rect x="24" y="254" width="126" height="26" rx="6" fill="none" stroke="#ef4444" stroke-opacity="0.6" />
 					<text x="34" y="271" class="svg-t" font-size="12">invoice.html</text>
-					<text x="26" y="308" class="svg-m" font-size="12">PayPal Security Team</text>
+					<text x="26" y="308" class="svg-m" font-size="12">AcmePay Security Team</text>
 
 					<!-- Phish callout numbers -->
 					<g font-size="11" font-weight="600">
@@ -346,19 +347,19 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 
 					<!-- Legit card -->
 					<rect x="390" y="28" width="362" height="336" rx="8" fill="var(--color-surface)" stroke="#10b981" stroke-opacity="0.45" />
-					<text x="408" y="56" class="svg-t" font-size="13">From: PayPal</text>
-					<text x="408" y="74" class="svg-mono svg-m" font-size="12">&lt;service@paypal.com&gt;</text>
+					<text x="408" y="56" class="svg-t" font-size="13">From: AcmePay</text>
+					<text x="408" y="74" class="svg-mono svg-m" font-size="12">&lt;service@acmepay.com&gt;</text>
 					<text x="408" y="98" class="svg-t" font-size="13">Subject: Your September statement</text>
 					<line x1="404" y1="112" x2="738" y2="112" stroke="var(--color-border)" />
 					<text x="408" y="136" class="svg-t" font-size="13">Hello Yomal,</text>
 					<text x="408" y="160" class="svg-m" font-size="12.5">Your September statement is now</text>
 					<text x="408" y="176" class="svg-m" font-size="12.5">available in your account overview.</text>
 					<text x="408" y="192" class="svg-m" font-size="12.5">No action is needed.</text>
-					<text x="408" y="220" class="svg-link" font-size="12.5" text-decoration="underline">https://www.paypal.com/statements</text>
-					<text x="408" y="240" class="svg-mono svg-m" font-size="11">goes to: paypal.com</text>
+					<text x="408" y="220" class="svg-link" font-size="12.5" text-decoration="underline">https://www.acmepay.com/statements</text>
+					<text x="408" y="240" class="svg-mono svg-m" font-size="11">goes to: acmepay.com</text>
 					<text x="408" y="271" class="svg-t" font-size="12">Anna Perera</text>
-					<text x="408" y="288" class="svg-m" font-size="11">PayPal Customer Service</text>
-					<text x="408" y="308" class="svg-m" font-size="11">help.paypal.com</text>
+					<text x="408" y="288" class="svg-m" font-size="11">AcmePay Customer Service</text>
+					<text x="408" y="308" class="svg-m" font-size="11">help.acmepay.com</text>
 
 					<!-- Legit checkmarks -->
 					<g stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -373,7 +374,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 			</div>
 
 			<ol>
-				<li>The display name says PayPal. The address is on a domain PayPal has never heard of.</li>
+				<li>The display name says AcmePay. The address is on a domain AcmePay has never heard of.</li>
 				<li>Panic in the subject line. Real statements don't shout.</li>
 				<li>A generic greeting from a company that knows your name.</li>
 				<li>A deadline and a threat, there to make you act before you think.</li>
@@ -383,13 +384,13 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 
 			<p>
 				Look closely at the domains themselves, because lookalikes are better than most people
-				think. <code>paypa1.com</code> with a one. <code>rnicrosoft.com</code>, where r
-				and n sit close enough to read as m. Cyrillic letters that render identically to Latin
-				ones. And cousin domains like <code>paypal-security-alerts[.]com</code>, which
+				think. A 1 swapped in for a lowercase l. <code>acrnepay[.]com</code>, where r and n sit
+				close enough together to read as m. Cyrillic letters that render identically to Latin
+				ones. And cousin domains like <code>acmepay-security-alerts[.]com</code>, which
 				technically impersonate nothing: registered normally, carrying their own valid SPF, DKIM
-				and DMARC, passing every authentication check while never touching PayPal's actual
+				and DMARC, passing every authentication check while never touching AcmePay's actual
 				domain. And anything to the left of a registered domain is a subdomain, a prefix the
-				owner can name however they like, which is how paypal.com ends up decorating an
+				owner can name however they like, which is how acmepay.com ends up decorating an
 				attacker's address. This is why reading from the end is the habit worth building:
 			</p>
 
@@ -400,22 +401,22 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 					<polygon points="348,38 362,32 362,44" fill="var(--color-text-muted)" />
 
 					<text x="110" y="82" class="svg-mono" font-size="20">
-						<tspan class="svg-m">hxxps://</tspan><tspan class="svg-t">paypal.com.</tspan><tspan class="svg-red" font-weight="700">account-verify.net</tspan><tspan class="svg-m">/login</tspan>
+						<tspan class="svg-m">hxxps://</tspan><tspan class="svg-t">acmepay.com.</tspan><tspan class="svg-red" font-weight="700">account-verify.net</tspan><tspan class="svg-m">/login</tspan>
 					</text>
 
-					<line x1="208" y1="98" x2="336" y2="98" stroke="var(--color-text-muted)" stroke-width="1.5" />
-					<text x="272" y="122" text-anchor="middle" class="svg-m" font-size="13">just a subdomain,</text>
-					<text x="272" y="140" text-anchor="middle" class="svg-m" font-size="13">named to look like the brand</text>
+					<line x1="208" y1="98" x2="346" y2="98" stroke="var(--color-text-muted)" stroke-width="1.5" />
+					<text x="277" y="122" text-anchor="middle" class="svg-m" font-size="13">just a subdomain,</text>
+					<text x="277" y="140" text-anchor="middle" class="svg-m" font-size="13">named to look like the brand</text>
 
-					<line x1="342" y1="98" x2="558" y2="98" stroke="#ef4444" stroke-width="2" />
-					<text x="450" y="122" text-anchor="middle" class="svg-red" font-size="13" font-weight="600">the site you are actually on,</text>
-					<text x="450" y="140" text-anchor="middle" class="svg-red" font-size="13" font-weight="600">registered by the attacker</text>
+					<line x1="352" y1="98" x2="562" y2="98" stroke="#ef4444" stroke-width="2" />
+					<text x="457" y="122" text-anchor="middle" class="svg-red" font-size="13" font-weight="600">the site you are actually on,</text>
+					<text x="457" y="140" text-anchor="middle" class="svg-red" font-size="13" font-weight="600">registered by the attacker</text>
 				</svg>
 			</div>
 
 			<p>
 				One more, since most email is read on phones now: mobile clients usually show only the
-				display name and hide the address entirely. On a phone, "PayPal Support" is all anyone
+				display name and hide the address entirely. On a phone, "AcmePay Support" is all anyone
 				sees. The real address, <code>service@secure-notify[.]top</code>, is one tap away, and
 				almost nobody makes that tap.
 			</p>
@@ -430,7 +431,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 			</p>
 			<p>
 				The indicators go into a table, defanged. This campaign ran two lures, the spoofed
-				PayPal header above and the lookalike sender from the diagram, so both end up in the
+				AcmePay header above and the lookalike sender from the diagram, so both end up in the
 				same table:
 			</p>
 			<table>
@@ -454,7 +455,7 @@ Message-ID: &lt;20260901071542.9A3F1B@srv2.secure-notify.top&gt;</code></pre>
 					</tr>
 					<tr>
 						<td>URL</td>
-						<td><code>hxxps://paypal.com.account-verify[.]net/login</code></td>
+						<td><code>hxxps://acmepay.com.account-verify[.]net/login</code></td>
 						<td>Credential harvesting page</td>
 					</tr>
 					<tr>
