@@ -7,7 +7,7 @@ export const profile = {
 	bio: 'Cyber Security Analyst with hands-on experience in threat detection, incident response, and vulnerability assessment. Passionate about offensive security and CTF competitions.',
 	social: {
 		github: 'https://github.com/ReTr0ScR1Pt',
-		linkedin: 'https://www.linkedin.com/in/yomal-praveen-28239b216/',
+		linkedin: 'https://www.linkedin.com/in/yomal-praveen-8762113bb/',
 	}
 };
 
